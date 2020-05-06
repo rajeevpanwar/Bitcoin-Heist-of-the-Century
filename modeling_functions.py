@@ -24,9 +24,9 @@ class LSTM_Reshaper(BaseEstimator, TransformerMixin):
         return X.reshape(X.shape[0], 1, X.shape[1])
 
 
-def keras_model_wrapper(X):
+def keras_model_wrapper(train_data):
     model = Sequential()
-    model.add(LSTM(4, batch_input_shape=(X.shape[0], 1, X.shape[1]), stateful=True))
+    model.add(LSTM(4, batch_input_shape=(train_data.shape[0], 1, train_data.shape[1]), stateful=True))
     model.add(Dense(1))
     model.compile(loss='mean_squared_error', optimizer='adam')
     return model
