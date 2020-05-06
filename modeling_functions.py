@@ -6,7 +6,6 @@ import statsmodels.api as sm
 from sklearn.base import BaseEstimator, TransformerMixin
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
-from tensorflow.keras.wrappers.scikit_learn import KerasRegressor
 
 
 class LSTM_Reshaper(BaseEstimator, TransformerMixin):
@@ -37,9 +36,17 @@ def diff_handle_missing(df, diff, lag=0):
 
 def ts_to_supervised(df, lag=1):
     df = pd.DataFrame(df)
-    idx, shift = df.index, df.index.shift(lag)
+    idx, shift = df.index, df.index.shift(-lag)
     new_idx = idx.union(shift)
-    return df.reindex(new_idx).shift(lag, fill_value=0)
+    return df.reindex(new_idx).shift(-lag, fill_value=0).iloc[lag:-lag]
+
+def preprocess_lstm(df, lag=1, diff=1):
+    X = diff_handle_missing(df, diff)
+    y = ts_to_supervised(X, lag)
+    X = X[:-lag]
+#     y = ts_to_supervised(df, lag)
+#     X, y = diff_handle_missing(df, diff), diff_handle_missing(y, diff)
+    return X, y
 
 def pdq_combinations(season_period, max_p, max_d, max_q):
     p, d, q = range(0, max_p+1), range(0, max_d+1), range(0, max_q+1)
