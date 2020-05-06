@@ -55,6 +55,6 @@ class Keras_Custom_Fitter(KerasRegressor):
         fit_args.update(kwargs)
 
         history = self.model.fit(x, y, **fit_args)
-        history.reset_states()
+        self.model.reset_states()
 
         return history
