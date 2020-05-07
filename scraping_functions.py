@@ -18,6 +18,9 @@ def businessinsider_usd_history(start_date, end_date=datetime.date.today().strft
     return df
 
 def coinmarketcap_history(coin, start_date, end_date=datetime.date.today().strftime("%Y%m%d"), directory=""):
+    """A function that scrapes from CoinMarketCap and parses the results into a DataFrame. A backup of the data
+    can also be exported to a json specified by setting a directory."""
+
     html = scrape_coinmarketcap_history(coin, start_date, end_date)
     df = parse_coinmarketcap_history(html)
     save_backup_json(df, directory, coin, start_date, end_date)
