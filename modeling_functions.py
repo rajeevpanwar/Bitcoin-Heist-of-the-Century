@@ -4,8 +4,11 @@ import pandas as pd
 import numpy as np
 import statsmodels.api as sm
 from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.metrics import mean_squared_error
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
+from tensorflow.keras.optimizers import Adam
 
 
 class LSTM_Reshaper(BaseEstimator, TransformerMixin):
@@ -24,15 +27,25 @@ class LSTM_Reshaper(BaseEstimator, TransformerMixin):
         return X.reshape(X.shape[0], 1, X.shape[1])
 
 
-def keras_model_wrapper(train_data):
+def keras_model_wrapper(l1_batch_input_shape, l1_neurons, mod_lr):
     model = Sequential()
-    model.add(LSTM(4, batch_input_shape=(train_data.shape[0], 1, train_data.shape[1]), stateful=True))
+    model.add(LSTM(l1_neurons, batch_input_shape=l1_batch_input_shape, stateful=True))
     model.add(Dense(1))
-    model.compile(loss='mean_squared_error', optimizer='adam')
+    model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=mod_lr, beta_1=0.9, beta_2=0.999, amsgrad=False))
     return model
 
 def diff_handle_missing(df, diff, lag=0):
     return df.diff(diff).iloc[diff + lag:]
+
+def evaluate_intersection_loss(pred, test):
+    intersection = pred.index.intersection(test.index)
+    if intersection.size == 0:
+        print("There is no intersection")
+        return None
+    mse = mean_squared_error(pred.loc[intersection], test.loc[intersection])
+    rmse = math.sqrt(mse)
+    print(f"MSE: {mse}, RMSE: {rmse})")
+    return rmse
 
 def ts_to_supervised(df, lag=1):
     df = pd.DataFrame(df)
@@ -41,12 +54,48 @@ def ts_to_supervised(df, lag=1):
     return df.reindex(new_idx).shift(-lag, fill_value=0).iloc[lag:-lag]
 
 def preprocess_lstm(df, lag=1, diff=1):
+    df = np.log(df.copy())
     X = diff_handle_missing(df, diff)
     y = ts_to_supervised(X, lag)
     X = X[:-lag]
 #     y = ts_to_supervised(df, lag)
 #     X, y = diff_handle_missing(df, diff), diff_handle_missing(y, diff)
     return X, y
+
+def lstm_predictions(model, train, cols, max_predictions=30):
+    predictions = pd.DataFrame([], columns=cols)
+    history = np.log(train[cols].copy())
+    X, y = preprocess_lstm(train)
+    X, y = X[cols], y[cols]
+    scaler = MinMaxScaler()
+    scaler.fit(y)
+
+    #This function is called once to compensate for resetting of the model's state at every iteration. On the second call,
+    #the predictions are stored into a variable.
+    lstm_raw_predictions(model, X)
+
+    raw_predictions = lstm_raw_predictions(model, X)
+    count = 0
+    for raw_prediction in raw_predictions:
+        new_index = history.index.shift(1)[-1:]
+        prediction = lstm_untransform_value(raw_prediction, scaler, history)
+        prediction = pd.DataFrame(prediction, index=new_index, columns=cols)
+        history = pd.concat([history, prediction])
+        predictions = pd.concat([predictions, np.exp(prediction)])
+        count += 1
+        if count >= max_predictions:
+            break
+    return predictions
+
+def lstm_raw_predictions(model, X):
+	yhat = model.predict(X)
+	return yhat
+
+def lstm_untransform_value(raw_val, scaler, history):
+    reshaped = raw_val.reshape(raw_val.size,1)
+    unscaled = scaler.inverse_transform(reshaped)
+    undiffed = history.values[-1:] + unscaled
+    return undiffed
 
 def pdq_combinations(season_period, max_p, max_d, max_q):
     p, d, q = range(0, max_p+1), range(0, max_d+1), range(0, max_q+1)
