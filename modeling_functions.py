@@ -77,10 +77,17 @@ def lstm_predictions(model, train, cols, max_predictions=30):
     raw_predictions = lstm_raw_predictions(model, X)
     count = 0
     for raw_prediction in raw_predictions:
-        new_index = history.index.shift(1)[-1:]
-        prediction = lstm_untransform_value(raw_prediction, scaler, history)
+        if count <= 1:
+            new_index = history.index[-1:]
+            prediction = lstm_untransform_value(raw_prediction, scaler, history, 2)
+        else:
+            new_index = history.index.shift(1)[-1:]
+            prediction = lstm_untransform_value(raw_prediction, scaler, history, 1)
         prediction = pd.DataFrame(prediction, index=new_index, columns=cols)
-        history = pd.concat([history, prediction])
+        if count <= 1:
+            pass
+        else:
+            history = pd.concat([history, prediction])
         predictions = pd.concat([predictions, np.exp(prediction)])
         count += 1
         if count >= max_predictions:
@@ -91,10 +98,13 @@ def lstm_raw_predictions(model, X):
 	yhat = model.predict(X)
 	return yhat
 
-def lstm_untransform_value(raw_val, scaler, history):
+def lstm_untransform_value(raw_val, scaler, history, offset):
     reshaped = raw_val.reshape(raw_val.size,1)
     unscaled = scaler.inverse_transform(reshaped)
-    undiffed = history.values[-1:] + unscaled
+    if offset == 1:
+        undiffed = history.values[-1:] + unscaled
+    else:
+        undiffed = history.values[-offset:-offset+1] + unscaled
     return undiffed
 
 def pdq_combinations(season_period, max_p, max_d, max_q):
