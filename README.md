@@ -2,7 +2,8 @@
 
 # Project Title - Time Series Forecasting Bitcoin Prices by Corey Hanson & Rajeev Panwar
 
-# Goal - To generate and evaluate best time series forecasting model to predict dailybitcoin prices (upto 15 days into the future)
+# Goal 
+To generate and evaluate various time series forecasting models to predict daily bitcoin prices
 
 # Approach 
 1. Data Collection - We collected 2562 observations (daily price of bitcoin) going back to 2013-04-28. Our main dataset (https://www.kaggle.com/sudalairajkumar/cryptocurrencypricehistory) was pulled from Kaggle. It contains data from a selection of various cyptocurrencies where price data was scraped from CoinMarketCap which in the timeline of the crptocurrency market had early on established itself as a popular player in providing market data from this new asset class
@@ -23,9 +24,9 @@
 # Findings & Key Learning 
 Our preferred model is 
 
-Bitcoin prices are hard to predict. We will probably need to incorporate an exogenous variable to capture investor sentiment around Bitcoin in a better manner to help improve quality of predictions. The test data included last 15-20 days of substiantial market volatility resulting in lower RMSE than expected. Our preferred model seems to do much better when we remove a black swan event like the current global COVID pandemic  from our testing data with a revised RMSE of ___
+Bitcoin prices are hard to predict. We will probably need to incorporate an exogenous variable to capture investor sentiment around Bitcoin in a better manner to help improve quality of predictions. The test data included last 15-20 days has seen a lot of market volatility resulting in lower RMSE than expected. Our preferred model seems to do much better when we remove a black swan event like the current global COVID pandemic  from our testing data with a revised RMSE of ___
 
 # Next Steps
-Incorporate investor sentiment using count of tweets referencing bitcoin for the same time period to evaluate if predictive power in improved using exogenous variable 
+Incorporate investor sentiment using count of tweets referencing bitcoin for the same time period to evaluate if predictive power can be improved using exogenous variable 
 
 
