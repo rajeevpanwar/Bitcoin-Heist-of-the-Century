@@ -22,13 +22,13 @@ To generate and evaluate various time series forecasting models to predict daily
 
 
 # Findings & Key Learning
-Our preferred model is
+Our preferred model is ARIMA, but with more tuning we may get a better result from the LSTM.
 
 Bitcoin prices are hard to predict. Our best models missed the mark, but there are other exogenous variables that may be good candidates to better explain some of the variability. If we could capture investor sentiment around Bitcoin in more complete manner, that would likely help improve quality of predictions. Several good candidates to generate a better model would be:
 * Parsing in the media landscape. Supplementing the model with high quality/extensive samples are taken over time that uses Natural Language Processing to quantify sentiment in the media (both traditional and social)
 * Examining on-chain data. The blockchain is unique in that it ties a public ledger with metadata that is transparent to all. Several factors could indicate additional:
- * Supply - This would take form in creating a feature for new coins minted each day by taking the product of the current block reward with the total amount of blocks created on every day in the dataset.
- * Demand - It has been postulated that changes transaction volume and hashrate could account for some of the utiliity of a given blockchain, could indicate demand.
+    * Supply - This would take form in creating a feature for new coins minted each day by taking the product of the current block reward with the total amount of blocks created on every day in the dataset.
+    * Demand - It has been postulated that changes transaction volume and hashrate could account for some of the utiliity of a given blockchain, could indicate demand.
 
 The test data included last 15-20 days has seen a lot of market volatility resulting in higher RMSE than expected. When evaluating it against our testing data, we can see that with the RMSE that the RMSE contained in the earlier observations (215) is significantly lower than the actual RMSE over the entire period (860). Being humble with the time-span, we attempt to predict takes even more importance in the context of a black swan event like the current global COVID pandemic.
 
