@@ -27,7 +27,7 @@ Our functions are also contained in the following Python files:
 * [Cleaning](cleaning_functions.py)
 * [EDA](eda_functions.py)
 * [Modeling](modeling_functions.py)
-* [A moninor tweak to the TensorFlow Scikitlearn Wrapper Object](keras_wrapper_fix.py)
+* [A minor tweak to the TensorFlow Scikitlearn Wrapper Object](keras_wrapper_fix.py)
 
 
 # Model Performance
