@@ -30,7 +30,8 @@ Bitcoin prices are hard to predict. Our best models missed the mark, but there a
     * Supply - This would take form in creating a feature for new coins minted each day by taking the product of the current block reward with the total amount of blocks created on every day in the dataset.
     * Demand - It has been postulated that changes in transaction volume and hashrate could account for some of the utility of a given blockchain, which could indicate demand.
 
-The test data included the last 30 days and has seen a lot of market volatility resulting in higher RMSE than expected. When evaluating it against our testing data, we can see that with the RMSE that the RMSE contained in the earlier observations (215) is significantly lower than the actual RMSE over the entire period (860). Being humble with the time-span, we attempt to predict takes even more importance in the context of a black swan event like the current global COVID pandemic.
+The test data included the last 30 days and has seen a lot of market volatility resulting in higher RMSE than expected. When evaluating it against our testing data, we can see that with the RMSE that the RMSE contained in the earlier observations (215) is significantly lower than the actual RMSE over the entire period (860). Being humble with the time-span, we attempt to predict takes even more importance in the context of a black swan event like the current global COVID-19 pandemic.
 
-# Next Steps
-Incorporate investor sentiment using count of tweets referencing bitcoin for the same time period to evaluate if predictive power can be improved using exogenous variable
+
+# Conclusion
+All models struggled to forecast the sudden shift in pricing trajectory due to COVID-19 and as such we were unable to conclude which model performed best given close range of RMSE scores
