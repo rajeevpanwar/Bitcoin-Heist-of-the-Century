@@ -48,7 +48,7 @@ def plot_sarimax_one_step(model_results, observations, pred_date, date_trim=None
                     pred_ci.iloc[:, 0],
                     pred_ci.iloc[:, 1], color='k', alpha=.2)
     ax.set_xlabel('Date')
-    ax.set_ylabel('Furniture Sales')
+    ax.set_ylabel('Price')
     plt.legend()
     plt.show()
 
