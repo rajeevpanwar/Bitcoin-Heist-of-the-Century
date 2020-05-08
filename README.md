@@ -19,7 +19,7 @@ To generate and evaluate various time series forecasting models to predict daily
 All of our work is contained in the following notebooks.
 * [Data Gathering](bitcoin_data_gathering.ipynb)
 * [The ARIMA Model](bitcoin_arima.ipynb)
-* [The FB Prophet Model - Needs to be merged
+* [The FB Prophet Model](bitcoin_prophet_normal.ipynb)
 * [The LSTM Model](bitcoin_lstm.ipynb)
 
 Our functions are also contained in the following Python files:
