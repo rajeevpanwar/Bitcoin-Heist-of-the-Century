@@ -14,6 +14,22 @@ To generate and evaluate various time series forecasting models to predict daily
 
 4. Model Evaluation Metric - RMSE
 
+# The Notebooks
+
+All of our work is contained in the following notebooks.
+[Data Gathering](bitcoin_data_gathering.ipynb)
+[The ARIMA Model](bitcoin_arima.ipynb)
+[The FB Prophet Model - Needs to be merged
+[The LSTM Model](bitcoin_lstm.ipynb)
+
+Our functions are also contained in the following Python files:
+[scraping](scraping_functions.py)
+[Cleaning](cleaning_functions.py)
+[EDA](eda_functions.py)
+[Modeling](modeling_functions.py)
+[A moninor tweak to the TensorFlow Scikitlearn Wrapper Object](keras_wrapper_fix.py)
+
+
 # Model Performance
 
 1. ARIMA - Optimised parameters - p =   , d =   , q =        , RMSE
