@@ -7,6 +7,8 @@ from statsmodels.tsa.stattools import adfuller
 
 
 def dickey_fuller_df(df):
+    """Takes in time series observations and conducts a Dickey-Fuller test for stationarity, returning the results in a DataFrame."""
+
     test = adfuller(df)
     dfoutput = pd.Series(test[0:4], index=['Test Statistic', 'p-value', '#Lags Used', 'Number of Observations Used'])
     for key, value in test[4].items():
@@ -14,8 +16,11 @@ def dickey_fuller_df(df):
     return dfoutput
 
 
-def rolling_ts_plot(df, halflife, figsize=(15, 10)):
-    sns.set_style("whitegrid")
+def rolling_ts_plot(df, halflife, figsize=(15, 10), style="darkgrid"):
+    """Creates a single plot of time series observations combined with exponentially weighted rolling averages of the mean and standard
+    deviations."""
+
+    sns.set_style(style)
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=figsize)
     mean = df.ewm(halflife=halflife).mean()
     std = df.ewm(halflife=halflife).std()
@@ -27,11 +32,17 @@ def rolling_ts_plot(df, halflife, figsize=(15, 10)):
 
 
 def stationarity_check(df, halflife, figsize=(15, 10)):
+    """A station that plots the rolling mean and standard deviation to the raw time series data and conducts a Dickey-Fuller
+    test of the data returning the dataframe."""
+
     rolling_ts_plot(df, halflife, figsize=figsize)
     return dickey_fuller_df(df)
 
 
 def plot_sarimax_one_step(model_results, observations, pred_date, date_trim=None, inv_func=None):
+    """This is the code that plotted our graphs for our Sarimax findings. It is far from optimized and would need
+    various edits for reuasability."""
+
     if not date_trim:
         date_trim = train.index[0]
     pred = model_results.get_prediction(start=pd.to_datetime(pred_date), dynamic=False)
