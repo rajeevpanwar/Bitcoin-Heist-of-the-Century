@@ -1,6 +1,6 @@
 # Project Title - Time Series Forecasting Bitcoin Prices by Corey Hanson & Rajeev Panwar
 
-# Presentation Link - https://docs.google.com/presentation/d/1M5vERP582uAsfVScsd-htrQs221mf0ROIDZvFb3FsyE/edit?usp=sharing
+# Presentation - [Bitcoin_Prices](https://docs.google.com/presentation/d/1M5vERP582uAsfVScsd-htrQs221mf0ROIDZvFb3FsyE/edit?usp=sharing)
 
 # Goal
 To generate and evaluate various time series forecasting models to predict daily bitcoin prices
