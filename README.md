@@ -1,6 +1,6 @@
-# Module 4 Project
-
 # Project Title - Time Series Forecasting Bitcoin Prices by Corey Hanson & Rajeev Panwar
+
+# Presentation Link - https://docs.google.com/presentation/d/1M5vERP582uAsfVScsd-htrQs221mf0ROIDZvFb3FsyE/edit?usp=sharing
 
 # Goal
 To generate and evaluate various time series forecasting models to predict daily bitcoin prices
@@ -15,11 +15,22 @@ To generate and evaluate various time series forecasting models to predict daily
 A simple time series decomposition of the data series showed the following interesting facts about the behavior of Bitcoin over this period
 ![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/ts_components.png)
 
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/stationary_hist.png)
+
+Checking for Autocorrelation & 'Lags'
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/acf.png)
+
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/pacf.png)
+
 3. Choice of Models - We explored 3 different models - ARIMA, Prophet (from Facebook) & a RNN with LTSM
 
+ARIMA Predictions
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/arima_prediction.png)
+
+LSTM (Chosen Model)
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/lstm_pred2.png
+
 4. Model Evaluation Metric - RMSE
-
-
 
 
 # The Notebooks
