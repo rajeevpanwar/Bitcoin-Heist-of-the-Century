@@ -10,9 +10,17 @@ To generate and evaluate various time series forecasting models to predict daily
 
 2. Data Preprocessing - Depending on the need of the model, we pre-processed the data using date-timestamp, log transformation and differencing to achieve stationarity for model buildout
 
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/btc_graph.png)
+
+A simple time series decomposition of the data series showed the following interesting facts about the behavior of Bitcoin over this period
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/ts_components.png)
+
 3. Choice of Models - We explored 3 different models - ARIMA, Prophet (from Facebook) & a RNN with LTSM
 
 4. Model Evaluation Metric - RMSE
+
+
+
 
 # The Notebooks
 
