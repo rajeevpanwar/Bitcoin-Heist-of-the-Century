@@ -18,17 +18,20 @@ A simple time series decomposition of the data series showed the following inter
 ![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/stationary_hist.png)
 
 Checking for Autocorrelation & 'Lags'
+
 ![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/acf.png)
 
 ![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/pacf.png)
+
 
 3. Choice of Models - We explored 3 different models - ARIMA, Prophet (from Facebook) & a RNN with LTSM
 
 ARIMA Predictions
 ![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/arima_prediction.png)
 
-LSTM (Chosen Model)
-![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/lstm_pred2.png
+LSTM Predictions (Chosen Model)
+
+![](https://github.com/rajeevpanwar/Bitcoin-Heist-of-the-Century-/blob/master/imgs/lstm_pred2.png)
 
 4. Model Evaluation Metric - RMSE
 
